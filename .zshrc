@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -70,8 +70,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-syntax-highlighting zsh-completions zsh-autosuggestions)
 
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -99,14 +100,7 @@ plugins=(git)
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-ZSH_CACHE_DIR=$HOME/.cache/oh-my-zsh
-if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
-fi
-
-source $ZSH/oh-my-zsh.sh
-
-export PATH=$PATH:~/.yarn/bin
+export PATH=$PATH:~/.yarn/bin:/home/pmh/.local/share/gem/ruby/3.0.0/bin
 
 alias vim="nvim"
 alias ssh="kitty +kitten ssh"
@@ -114,3 +108,7 @@ alias ssh="kitty +kitten ssh"
 fpath+=$HOME/.zsh/typewritten
 autoload -U promptinit; promptinit
 prompt typewritten
+
+autoload -U compinit && compinit
+
+pfetch
