@@ -1,46 +1,53 @@
 conky.config = {
-  background=true,
-  update_interval=0.01,
-  double_buffer=true,
-  no_buffers=true,
-  imlib_cache_size=10,
 
-  draw_shades=false,
-  draw_outline=false,
-  draw_borders=false,
+background=true,
+update_interval=0.01,
+double_buffer=true,
+no_buffers=true,
+imlib_cache_size=10,
 
-  gap_x=0,
-  gap_y=0,
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
 
-  alignment="bottom_left",
+gap_x=0,
+gap_y=0,
 
-  minimum_height=0,
-  minimum_width=0,
+alignment="bottom_right",
 
-  own_window=true,
-  own_window_type="override",
-  own_window_transparent=true,
-  own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
+minimum_height=0,
+minimum_width=0,
 
-  own_window_argb_visual=true,
-  own_window_argb_value=0,
+own_window=true,
+own_window_type="override",
+own_window_transparent=true,
+own_window_hints="undecorated,below,sticky,skip_taskbar,skip_pager",
 
-  use_xft=true,
-  xftalpha=1,
-  font="d2coding:size=9",
-  text_buffer_size=256,
-  override_utf8_locale=true,
+own_window_argb_visual=true,
+own_window_argb_value=0,
 
-  default_color='FFFFFF',
+use_xft=true,
+xftalpha=1,
+font="d2coding:size=10",
+text_buffer_size=256,
+override_utf8_locale=true,
 
-  color0='FFFFFF',
-  color1='FFFFFF',
+default_color='FFFFFF',
+
+color0='FFFFFF',
+color1='FFFFFF',
+
+
+
 }
 
+
+
 conky.text = [[
-b${exec cat /sys/class/power_supply/BAT1/capacity} \
-p${exec cat /sys/class/power_supply/ADP1/online} \
-c${cpu cpu0} \
+a${exec i3-volume output xob} \
+${exec grep 1 -q /sys/class/power_supply/ADP1/online && echo p || echo b}\
+${battery_percent BAT1} \
+c${if_match ${cpu cpu0}<10}0${endif}${cpu cpu0} \
 m${memperc} \
-v${exec i3-volume output xob}
+${time %I:%M}
 ]]
